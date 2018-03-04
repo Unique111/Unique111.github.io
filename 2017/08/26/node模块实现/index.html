@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>node模块实现 | unqie.mo的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="除了HTML、Webkit布局引擎和显卡这些UI相关技术没有支持外，Node的结构和Chrome十分相似。Node不处理UI，但用与浏览器相同的机制和原理运行。 CommonJS的模块规范CommonJs对模块的定义非常简单，主要分为模块引用（require）、模块定义（module.exports）和模块标识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node模块实现">
+<meta property="og:url" content="http://yoursite.com/2017/08/26/node模块实现/index.html">
+<meta property="og:site_name" content="unqie.mo的博客">
+<meta property="og:description" content="除了HTML、Webkit布局引擎和显卡这些UI相关技术没有支持外，Node的结构和Chrome十分相似。Node不处理UI，但用与浏览器相同的机制和原理运行。 CommonJS的模块规范CommonJs对模块的定义非常简单，主要分为模块引用（require）、模块定义（module.exports）和模块标识。">
+<meta property="og:updated_time" content="2018-03-04T08:44:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node模块实现">
+<meta name="twitter:description" content="除了HTML、Webkit布局引擎和显卡这些UI相关技术没有支持外，Node的结构和Chrome十分相似。Node不处理UI，但用与浏览器相同的机制和原理运行。 CommonJS的模块规范CommonJs对模块的定义非常简单，主要分为模块引用（require）、模块定义（module.exports）和模块标识。">
+    
+
+    
+        <link rel="alternate" href="/" title="unqie.mo的博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">unqie.mo的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            <section id="main"><article id="post-node模块实现" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            node模块实现
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/08/26/node模块实现/">
+            <time datetime="2017-08-25T16:00:00.000Z" itemprop="datePublished">2017-08-26</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/node/">node</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>除了HTML、Webkit布局引擎和显卡这些UI相关技术没有支持外，Node的结构和Chrome十分相似。<br>Node不处理UI，但用与浏览器相同的机制和原理运行。</p>
+<h3 id="CommonJS的模块规范"><a href="#CommonJS的模块规范" class="headerlink" title="CommonJS的模块规范"></a>CommonJS的模块规范</h3><p>CommonJs对模块的定义非常简单，主要分为模块引用（require）、模块定义（module.exports）和模块标识。</p>
+<a id="more"></a>
+<h3 id="Node的模块实现"><a href="#Node的模块实现" class="headerlink" title="Node的模块实现"></a>Node的模块实现</h3><p>在Node中引入模块，需要经历3个步骤：路径分析、文件定位、编译执行。</p>
+<p>在Node中，模块分为两类：（1）Node提供的模块，称为核心模块；（2）用户编写的模块，称为文件模块。<br>核心模块：在Node源代码的编译过程中，编译进了二进制执行文件。引用核心模块时，文件定位和编译执行这2个步骤可以省略，并且在路径分析中优先判断，所以它的加载速度是最快的。<br>文件模块：在运行时动态加载，需要完整的路径分析、文件定位、编译执行过程，速度比核心模块慢。</p>
+<h4 id="优先从缓存加载"><a href="#优先从缓存加载" class="headerlink" title="优先从缓存加载"></a>优先从缓存加载</h4><h4 id="路径分析和文件定位"><a href="#路径分析和文件定位" class="headerlink" title="路径分析和文件定位"></a>路径分析和文件定位</h4><h5 id="模块标识符分析"><a href="#模块标识符分析" class="headerlink" title="模块标识符分析"></a>模块标识符分析</h5><ul>
+<li>核心模块</li>
+<li>路径形式的文件模块</li>
+<li>自定义模块</li>
+</ul>
+<h5 id="文件定位"><a href="#文件定位" class="headerlink" title="文件定位"></a>文件定位</h5><ul>
+<li>文件扩展名分析<br>.js，.json，.node，分析过程中，会调用fs模块同步阻塞式地判断文件是否存在。</li>
+<li>目录分析和包<br>目录 =&gt; package.json =&gt; 通过JSON.parse()解析出包描述对象，取出main属性指定的文件名进行定位。<br>若没有package.json文件，Node会将index当作默认文件名。</li>
+</ul>
+<h4 id="模块编译"><a href="#模块编译" class="headerlink" title="模块编译"></a>模块编译</h4><p>在Node中，每个文件模块都是一个对象，定义如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Module</span>(<span class="params">id, parent</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.id = id;</span><br><span class="line">  <span class="keyword">this</span>.exports = &#123;&#125;;</span><br><span class="line">  <span class="keyword">this</span>.parent = parent;</span><br><span class="line">  <span class="keyword">if</span> (parent &amp;&amp; parent.children) &#123;</span><br><span class="line">    parent.children.push(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.filename = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">this</span>.loaded = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">this</span>.children = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定位到具体的文件后，Node会新建一个模块对象，然后根据路径载入并编译。</p>
+<ul>
+<li>.js文件：通过fs模块同步读取文件后编译执行；</li>
+<li>.node文件：用C/C++编写，通过dlopen()方法加载；</li>
+<li>.json文件：通过fs模块同步读取文件后，用JSON.parse()解析返回结果；</li>
+<li>其他文件：当作.js文件载入。</li>
+</ul>
+<p>每一个编译成功的模块都会将其文件路径作为索引缓存在Module._cache对象上，以提高二次引用的性能。</p>
+<p>在确定文件的扩展名后，Node将调用具体的编译方式来将文件执行后返回给调用者。</p>
+<h5 id="JavaScript模块编译"><a href="#JavaScript模块编译" class="headerlink" title="JavaScript模块编译"></a>JavaScript模块编译</h5><p>在编译的过程中，Node对获取的JavaScript文件内容进行了头尾包装。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在头部添加：(<span class="function"><span class="keyword">function</span> (<span class="params">exports, require, module, __filename, __dirname</span>) </span>&#123;\n</span><br><span class="line">在尾部添加：\n&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>一个正常的js文件会被包装成如下样子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">exports, require, module, __filename, __dirname</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> math = <span class="built_in">require</span>(<span class="string">'math'</span>);</span><br><span class="line">  exports.area = <span class="function"><span class="keyword">function</span> (<span class="params">radius</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.PI * radius * radius;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样每个模块文件之间都进行了作用域隔离。包装之后的代码会通过vm原生模块的runInThisContext()方法执行，返回一个具体的function对象。</p>
+<p>最后，将当前模块对象的exports属性、require()方法、module（模块对象自身）以及在文件定位中得到的完整文件路径和文件目录作为参数传递给这个function()执行。</p>
+<h5 id="C-C-模块的编译"><a href="#C-C-模块的编译" class="headerlink" title="C/C++模块的编译"></a>C/C++模块的编译</h5><p>Node调用process.dlopen()方法进行加载和执行。</p>
+<h5 id="JSON文件的编译"><a href="#JSON文件的编译" class="headerlink" title="JSON文件的编译"></a>JSON文件的编译</h5><h3 id="包与NPM"><a href="#包与NPM" class="headerlink" title="包与NPM"></a>包与NPM</h3><h4 id="NPM常用功能"><a href="#NPM常用功能" class="headerlink" title="NPM常用功能"></a>NPM常用功能</h4><p>CommonJS包规范是理论，NPM是其中的一种实践。</p>
+<h5 id="常看帮助"><a href="#常看帮助" class="headerlink" title="常看帮助"></a>常看帮助</h5><h5 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h5><h5 id="NPM钩子命令"><a href="#NPM钩子命令" class="headerlink" title="NPM钩子命令"></a>NPM钩子命令</h5><p>package.json 的 scripts 字段，命令：prexxx，xxx，postxxx</p>
+<h5 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h5><ul>
+<li><p>编写模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exports.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hello, world'</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化包描述文件<br>命令：npm init</p>
+</li>
+<li>注册包仓库账号<br>为了维护包，NPM必须要使用仓库账号才允许将包发布到仓库中。<br>npm adduser</li>
+<li>上传包<br>上传包的命令是：npm publish。<br>在刚刚创建的package.json文件所在的目录下，执行npm publish .开始上传包。<br>在这个过程中，NPM会将目录打包成一个存档文件，然后上传到官方源仓库中。</li>
+<li>安装包</li>
+<li>管理包权限<br>通常，一个包只有一个人拥有权限进行发布。如果需要多人进行发布，可以使用npm owner命令来管理包的所有者：npm owner ls xxx包名<br>npm owner ls (package name)<br>npm owner add (user) (package name)<br>npm owner rm (user) (package name)</li>
+</ul>
+<h5 id="分析包"><a href="#分析包" class="headerlink" title="分析包"></a>分析包</h5><p>在使用NPM的过程中，如果不能确认当前目录下能否通过require()顺利引入想要的包，可以执行 npm ls 分析包。<br>这个命令可以分析出当前路径下能够通过模块路径找到的所有包，并生产依赖树。</p>
+<h3 id="前后端共用模块"><a href="#前后端共用模块" class="headerlink" title="前后端共用模块"></a>前后端共用模块</h3><h4 id="模块的侧重点"><a href="#模块的侧重点" class="headerlink" title="模块的侧重点"></a>模块的侧重点</h4><p>前后端JavaScript分别搁置在HTTP的两端，它们扮演的角色并不同。浏览器端的JavaScript需要经历<code>从同一个服务器端分发到多个客户端执行</code>，而服务器端JavaScript则是<code>相同的代码需要多次执行</code>。</p>
+<p>前者的瓶颈在于带宽，后者的瓶颈则在于CPU和内存等资源。前者需要通过网络加载代码，后者从磁盘中加载，两者的加载速度不在一个数量级上。</p>
+<p>鉴于网络的原因，CommonJS为后端JavaScript制定的规范并不完全适合前端的应用场景。经过一段争执后，AMD规范最终在前端应用场景中胜出。此外，还有玉伯定义的CMD规范。</p>
+<h4 id="AMD规范（Asynchronous-Module-Definition，“异步模块定义”）"><a href="#AMD规范（Asynchronous-Module-Definition，“异步模块定义”）" class="headerlink" title="AMD规范（Asynchronous Module Definition，“异步模块定义”）"></a>AMD规范（Asynchronous Module Definition，“异步模块定义”）</h4><p>AMD规范是CommonJS模块规范的一个延伸，定义：define(id?, dependencies?, factory);<br>它的模块id和依赖是可选的，与Node模块相似的地方：factory的内容就是实际代码的内容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> exports = &#123;&#125;;</span><br><span class="line">  exports.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'Hello from module: '</span> + <span class="built_in">module</span>.id);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> exports;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>不同之处：AMD模块需要用define来明确定义一个模块，而在Node中是隐式包装的，目的都是进行作用域隔离，仅在需要的时候被引入，避免掉过去那种通过全局变量或者全局命名空间的方式，以免变量污染和不小心被修改。另一个区别是<code>内容需要通过返回的方式实现导出</code>。</p>
+<h4 id="CMD规范"><a href="#CMD规范" class="headerlink" title="CMD规范"></a>CMD规范</h4><p>CMD规范与AMD规范的主要区别在于定义模块和依赖引入的部分。</p>
+<p>AMD规范需要在声明模块的时候指定所有的依赖，通过形参传递依赖到模块内容中：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'dep1'</span>, <span class="string">'dep2'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">dep1, dep2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>与AMD模块规范相比，CMD模块更接近于Node对CommonJS规范的定义：define(factory);<br>在依赖部分，CMD支持动态引入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, exports, module</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// The module code goes here</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>require，exports和module通过形参传递给模块，在需要依赖模块时，随时调用require()引入即可。</p>
+<h4 id="兼容多种模块规范"><a href="#兼容多种模块规范" class="headerlink" title="兼容多种模块规范"></a>兼容多种模块规范</h4><p>为了保持前后端的一致性，类库开发者需要将类库代码包装在一个闭包内。以下示例能够兼容Node、AMD、CMD以及常见的浏览器环境：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">name, definition</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 检测上下文环境是否为AMD或CMD</span></span><br><span class="line">  <span class="keyword">var</span> hasDefine = <span class="keyword">typeof</span> define === <span class="string">'function'</span>;</span><br><span class="line">  <span class="comment">// 检查上下文环境是否为Node</span></span><br><span class="line">  <span class="keyword">var</span> hasExports = <span class="keyword">typeof</span> <span class="built_in">module</span> !== <span class="string">'undefined'</span> &amp;&amp; <span class="built_in">module</span>.exports;</span><br><span class="line">  <span class="keyword">if</span> (hasDefine) &#123;</span><br><span class="line">    <span class="comment">// AMD环境或CMD环境</span></span><br><span class="line">    define(definition);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (hasExports) &#123;</span><br><span class="line">    <span class="comment">// 定义为普通Node模块</span></span><br><span class="line">    <span class="built_in">module</span>.exports = definition();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 将模块的执行结果挂在window变量中，在浏览器中this指向window对象</span></span><br><span class="line">    <span class="keyword">this</span>[name] = definition();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="string">'hello'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">  <span class="keyword">return</span> hello;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/08/26/node模块实现/" data-id="cjeckctx2000dssjfldnh9mw6" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/08/27/构建Web应用1/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    构建Web应用1
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/08/22/hive-sql语句/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">hive sql语句</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 unique.mo<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

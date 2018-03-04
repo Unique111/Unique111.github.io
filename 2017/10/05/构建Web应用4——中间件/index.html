@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>构建Web应用4——中间件 | unqie.mo的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在实际项目中，有多琐碎的工作需要完成。对于Web应用而言，我们希望不用接触到这么多细节性的处理，由此引入中间件（middleware）来简化和隔离这些基础设施与业务逻辑之间的细节，让开发者能够关注在业务的开发上，提升开发效率。 从HTTP请求到具体业务逻辑之间，其实有很多的细节要处理。Node的http模块提供了应用层协议网络的封装，对具体业务并没有支持，在业务逻辑之下，必须有开发框架对业务提供支">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建Web应用4——中间件">
+<meta property="og:url" content="http://yoursite.com/2017/10/05/构建Web应用4——中间件/index.html">
+<meta property="og:site_name" content="unqie.mo的博客">
+<meta property="og:description" content="在实际项目中，有多琐碎的工作需要完成。对于Web应用而言，我们希望不用接触到这么多细节性的处理，由此引入中间件（middleware）来简化和隔离这些基础设施与业务逻辑之间的细节，让开发者能够关注在业务的开发上，提升开发效率。 从HTTP请求到具体业务逻辑之间，其实有很多的细节要处理。Node的http模块提供了应用层协议网络的封装，对具体业务并没有支持，在业务逻辑之下，必须有开发框架对业务提供支">
+<meta property="og:updated_time" content="2018-03-04T08:44:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建Web应用4——中间件">
+<meta name="twitter:description" content="在实际项目中，有多琐碎的工作需要完成。对于Web应用而言，我们希望不用接触到这么多细节性的处理，由此引入中间件（middleware）来简化和隔离这些基础设施与业务逻辑之间的细节，让开发者能够关注在业务的开发上，提升开发效率。 从HTTP请求到具体业务逻辑之间，其实有很多的细节要处理。Node的http模块提供了应用层协议网络的封装，对具体业务并没有支持，在业务逻辑之下，必须有开发框架对业务提供支">
+    
+
+    
+        <link rel="alternate" href="/" title="unqie.mo的博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">unqie.mo的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            <section id="main"><article id="post-构建Web应用4——中间件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            构建Web应用4——中间件
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/10/05/构建Web应用4——中间件/">
+            <time datetime="2017-10-04T16:00:00.000Z" itemprop="datePublished">2017-10-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/node/">node</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>在实际项目中，有多琐碎的工作需要完成。对于Web应用而言，我们希望不用接触到这么多细节性的处理，由此引入中间件（middleware）来简化和隔离这些基础设施与业务逻辑之间的细节，让开发者能够关注在业务的开发上，提升开发效率。</p>
+<p>从HTTP请求到具体业务逻辑之间，其实有很多的细节要处理。Node的http模块提供了应用层协议网络的封装，对具体业务并没有支持，在业务逻辑之下，必须有开发框架对业务提供支持。这里我们通过中间件的形式搭建开发框架，这个开发框架用来组织各个中间件。对于Web应用的各种基础功能，我们通过中间件来完成，每个中间件处理掉相对简单的逻辑，最终汇成强大的基础框架。</p>
+<a id="more"></a>
+<p>中间件的上下文就是请求对象和响应对象：req和res。由于Node异步的原因，我们需要提供一种机制，在当前中间件处理完成后，通知下一个中间件执行。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> middleware = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">  next();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在业务逻辑中添加中间件：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">'/user/:username'</span>, querystring, cookie, session, <span class="function"><span class="keyword">function</span>(<span class="params">req, rs</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// querystring解析中间件</span></span><br><span class="line"><span class="keyword">var</span> querystring = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  req.query = url.parse(req.url, <span class="literal">true</span>).query;</span><br><span class="line">  next();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>组织好中间件，将路由分离开来，将中间件和具体业务逻辑都看成业务处理单元，改进use()方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.use = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> handle = &#123;</span><br><span class="line">    <span class="comment">// 第一个参数作为路径</span></span><br><span class="line">    path: pathRegexp(path),</span><br><span class="line">    <span class="comment">// 其他的都是处理单元</span></span><br><span class="line">    stack: <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>)</span><br><span class="line">  &#125;;</span><br><span class="line">  routes.all.push(handle);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>改进后的use()方法将中间件都存进了stack数组中，等待匹配后触发执行。由于结构变化了，匹配部分也需要修改：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> match = <span class="function"><span class="keyword">function</span> (<span class="params">pathname, routes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; routes.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> route = routes[i];</span><br><span class="line">    <span class="comment">// 正则匹配</span></span><br><span class="line">    <span class="keyword">var</span> reg = route.path.regexp;</span><br><span class="line">    <span class="keyword">var</span> matched = reg.exec(pathname);</span><br><span class="line">    <span class="keyword">if</span> (matched) &#123;</span><br><span class="line">      <span class="comment">// 抽取具体值</span></span><br><span class="line">      <span class="comment">// 代码省略</span></span><br><span class="line">      <span class="comment">// 将中间件数组交给handle()方法处理</span></span><br><span class="line">      handle(req, res, route.stack);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>一旦匹配成功，中间件具体如何调动都交给了handle()方法处理，该方法封装后，递归性地执行数组中的中间件，每个中间件执行完成后，按照约定调用传入next()方法以触发下一个中间件执行（或者直接响应），直到最后的业务逻辑。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handle = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, stack</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> next = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 从stack数组中取出中间件并执行</span></span><br><span class="line">    <span class="keyword">var</span> middleware = stack.shift();</span><br><span class="line">    <span class="keyword">if</span> (middleware) &#123;</span><br><span class="line">      <span class="comment">// 传入next()函数自身，使中间件能够执行结束后递归</span></span><br><span class="line">      middleware(req, res, next);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 启动执行</span></span><br><span class="line">  next();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>中间件以上组织方式可进行优化，参考《深入浅出Node.js》p213。</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>为next()方法添加err参数，并捕获中间件直接抛出的同步异常：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handle = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, stack</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> next = <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="keyword">return</span> handle500(err, req, res, stack);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 从stack数组中取出中间件并执行</span></span><br><span class="line">    <span class="keyword">var</span> middleware = stack.shift();</span><br><span class="line">    <span class="keyword">if</span> (middleware) &#123;</span><br><span class="line">      <span class="comment">// 传入next()函数自身，使中间件能够执行结束后递归</span></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        middleware(req, res, next);</span><br><span class="line">      &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">        next(err);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 启动执行</span></span><br><span class="line">  next();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>由于异步方法的异常不能直接捕获，中间件异步产生的异常需要自己传递出来：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> session = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> id = req.cookie.sessionid;</span><br><span class="line">  store.get(id, <span class="function"><span class="keyword">function</span>(<span class="params">err, session</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="comment">// 将异常通过next()传递</span></span><br><span class="line">      <span class="keyword">return</span> next(err);</span><br><span class="line">    &#125;</span><br><span class="line">    req.session = session;</span><br><span class="line">    next();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>处理异常的中间件的设计与普通中间件略有差别，它的参数有4个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> middleware = <span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">  next();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>通过use()可以将异常处理的中间件注册起来：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>为了区分普通中间件和异常处理中间件，handle500()方法将会对中间件按参数进行选取，然后递归执行：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handle500 = <span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, stack</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 选取异常处理中间件</span></span><br><span class="line">  stack = stack.filter(<span class="function"><span class="keyword">function</span>(<span class="params">middleware</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> middleware.length === <span class="number">4</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">var</span> next = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 从stack数组中取出中间件并执行</span></span><br><span class="line">    <span class="keyword">var</span> middleware = stack.shift();</span><br><span class="line">    <span class="keyword">if</span> (middleware) &#123;</span><br><span class="line">      <span class="comment">// 传递异常对象</span></span><br><span class="line">      middleware(err, req, res, next);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 启动执行</span></span><br><span class="line">  next();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="中间件与性能"><a href="#中间件与性能" class="headerlink" title="中间件与性能"></a>中间件与性能</h3><ul>
+<li>编写高效的中间件<ul>
+<li>使用高效的方法</li>
+<li>缓存需要重复计算的结果</li>
+<li>避免不必要的计算</li>
+</ul>
+</li>
+<li>合理利用路由，避免不必要的中间件执行<br>在拥有一堆高效的中间件后，并不意味着每个中间件我们都使用，合理的路由使得不必要的中间件不参与请求处理的过程。</li>
+</ul>
+<p>例如有一个静态文件的中间件，它会对请求进行判断，如果磁盘上存在对应文件，就响应对应的静态文件，否则就交由下游中间件处理：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> staticFile = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pathname = url.parse(req.url).pathname;</span><br><span class="line">  fs.readFile(path.join(ROOT, pathname), <span class="function"><span class="keyword">function</span>(<span class="params">err, file</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="keyword">return</span> next();</span><br><span class="line">    &#125;</span><br><span class="line">    res.writeHead(<span class="number">200</span>);</span><br><span class="line">    res.end(file);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>如果以如下方式注册路由：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(staticFile);</span><br></pre></td></tr></table></figure></p>
+<p>那么意味着对/路径下所有的URL请求都会进行判断。十分浪费性能。<br>提升匹配成功率，添加一个更好的路由路径：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">'/public'</span>, staticFile);</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/10/05/构建Web应用4——中间件/" data-id="cjeckctxp000pssjft6045alk" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/10/10/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    Hello World
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/10/05/Node产品化/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">Node产品化</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 unique.mo<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

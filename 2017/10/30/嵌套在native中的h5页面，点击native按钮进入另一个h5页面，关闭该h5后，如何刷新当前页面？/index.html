@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？ | unqie.mo的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="背景通常，嵌套在native中的 i 版页面有这样的需求：点击页面 1 右上角的按钮（native的按钮），进入了页面 2（一个表单），那么当表单填写完毕，提交请求后，在页面 1 如何监听到请求的提交是否成功，然后刷新当前页面或做其他操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？">
+<meta property="og:url" content="http://yoursite.com/2017/10/30/嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？/index.html">
+<meta property="og:site_name" content="unqie.mo的博客">
+<meta property="og:description" content="背景通常，嵌套在native中的 i 版页面有这样的需求：点击页面 1 右上角的按钮（native的按钮），进入了页面 2（一个表单），那么当表单填写完毕，提交请求后，在页面 1 如何监听到请求的提交是否成功，然后刷新当前页面或做其他操作。">
+<meta property="og:updated_time" content="2018-03-04T08:43:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？">
+<meta name="twitter:description" content="背景通常，嵌套在native中的 i 版页面有这样的需求：点击页面 1 右上角的按钮（native的按钮），进入了页面 2（一个表单），那么当表单填写完毕，提交请求后，在页面 1 如何监听到请求的提交是否成功，然后刷新当前页面或做其他操作。">
+    
+
+    
+        <link rel="alternate" href="/" title="unqie.mo的博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">unqie.mo的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            <section id="main"><article id="post-嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/10/30/嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？/">
+            <time datetime="2017-10-29T16:00:00.000Z" itemprop="datePublished">2017-10-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>通常，嵌套在native中的 i 版页面有这样的需求：点击页面 1 右上角的按钮（native的按钮），进入了页面 2（一个表单），那么当表单填写完毕，提交请求后，在页面 1 如何监听到请求的提交是否成功，然后刷新当前页面或做其他操作。</p>
+<a id="more"></a>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>在页面 1 进入页面 2 时，初始化 localStorage 的值，在页面 2 操作后，修改 localStorage 的值，然后在页面 1 轮询 localStorage 里面的值，当监听到指定值变化后，停止轮询，然后就可以做页面 1 指定的操作了。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>在页面 1 中调用如下方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A 页面打开新的 webview 页面 B，A 在自己的页面中监听 B 对某些页面的改动</span></span><br><span class="line"><span class="comment"> * Android: 监听信息编辑页面对 localStorage 的改变</span></span><br><span class="line"><span class="comment">    $(window).on('storage',function(event) &#123;</span></span><br><span class="line"><span class="comment">      if (event.key === 'project-content') &#123;</span></span><br><span class="line"><span class="comment">        var content = JSON.parse(event.newValue).data;</span></span><br><span class="line"><span class="comment">        updateForm(&#123;content: content&#125;);</span></span><br><span class="line"><span class="comment">      &#125;</span></span><br><span class="line"><span class="comment">    &#125;);</span></span><br><span class="line"><span class="comment"> * iOS: 轮询 localStorage 里的 project-content 值，如果其 status 变为了 2，那么就说明数据就绪了</span></span><br><span class="line"><span class="comment">    这么做是因为 iOS 的 UIWebview 有 BUG，无法监听到 storage 事件……</span></span><br><span class="line"><span class="comment">    参考1：https://bugs.webkit.org/show_bug.cgi?id=145565</span></span><br><span class="line"><span class="comment">    参考2：https://zhuanlan.zhihu.com/p/22476760</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">  Tool.openAndPollingWebview = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 全局共用一个 _timerId</span></span><br><span class="line">    <span class="keyword">var</span> _timerId = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> key = options.listenTo || defaultLocalStorageKey;</span><br><span class="line">      options = &#123;</span><br><span class="line">        url: options.url,</span><br><span class="line">        assertion: options.assertion || <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;<span class="keyword">return</span> event.type === <span class="string">'close'</span>;&#125;,</span><br><span class="line">        onComplete: options.onComplete || <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      clearTimeout(_timerId);</span><br><span class="line">      localStorage.setItem(key, <span class="built_in">JSON</span>.stringify(&#123;<span class="attr">data</span>: <span class="string">''</span>, <span class="attr">status</span>: <span class="number">1</span>, <span class="attr">type</span>: <span class="string">''</span>&#125;));</span><br><span class="line">      <span class="keyword">var</span> storagePoll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> target = <span class="built_in">JSON</span>.parse(localStorage.getItem(key));</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'polling...key: '</span>, key, <span class="string">' | target: '</span>, target);</span><br><span class="line">        <span class="keyword">if</span> (target &amp;&amp; options.assertion(target)) &#123;</span><br><span class="line">          clearTimeout(_timerId);</span><br><span class="line">          options.onComplete(target);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          _timerId = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            storagePoll();</span><br><span class="line">          &#125;, <span class="number">400</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      storagePoll();</span><br><span class="line">      <span class="built_in">window</span>.location.href = options.url;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>页面 1 中的调用方式如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">xnb.addButtons([&#123;</span><br><span class="line">  type: <span class="string">'image'</span>,</span><br><span class="line">  url: base64Image,</span><br><span class="line">  callback: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = pageData.proSchema + <span class="string">'://www.meituan.com/web?url='</span> + location.origin + <span class="string">'/connect/project/create'</span>;</span><br><span class="line">    tools.openAndPollingWebview(&#123;</span><br><span class="line">      listenTo: <span class="string">'[buffer]/connect/project/create'</span>,</span><br><span class="line">      url: url,</span><br><span class="line">      assertion: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> event.status === <span class="number">2</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      onComplete: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (event.type === <span class="string">'saved'</span>) &#123;</span><br><span class="line">          <span class="built_in">window</span>.location.reload();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.type === <span class="string">'cancel'</span>) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'用户可能做了修改，但是没有提交，不必刷新本页面'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>页面 2 中点击取消按钮：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Tools = &#123;</span><br><span class="line">  <span class="comment">// 发布订阅模式</span></span><br><span class="line">  publishStorageEvent: <span class="function"><span class="keyword">function</span>(<span class="params">event, key</span>) </span>&#123;</span><br><span class="line">    key = key || (<span class="string">'[buffer]'</span> + location.pathname);</span><br><span class="line">    localStorage.setItem(key, <span class="built_in">JSON</span>.stringify(event));</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cancelFormEdit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 修改 localStorage</span></span><br><span class="line">  tools.publishStorageEvent(&#123;<span class="attr">data</span>: <span class="string">''</span>, <span class="attr">status</span>: <span class="number">2</span>, <span class="attr">type</span>: <span class="string">'cancel'</span>&#125;);</span><br><span class="line">  xnb.closeWebview();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>页面 2 中点击发起请求按钮：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ajax(&#123;</span><br><span class="line">  url: <span class="string">'xxx'</span>,</span><br><span class="line">  type: <span class="string">'POST'</span>,</span><br><span class="line">  contentType: <span class="string">'application/json'</span>,</span><br><span class="line">  data: <span class="built_in">JSON</span>.stringify(data),</span><br><span class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    toast(<span class="string">'项目提交成功&lt;br/&gt;24小时内审核完毕'</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (isCreatingNewProject) &#123;</span><br><span class="line">        <span class="built_in">window</span>.location.href = pageData.projectDetailURL + res.data;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 修改 localStorage</span></span><br><span class="line">        tools.publishStorageEvent(&#123;<span class="attr">data</span>: <span class="string">''</span>, <span class="attr">status</span>: <span class="number">2</span>, <span class="attr">type</span>: <span class="string">'saved'</span>&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      xnb.closeWebview();</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/10/30/嵌套在native中的h5页面，点击native按钮进入另一个h5页面，关闭该h5后，如何刷新当前页面？/" data-id="cjeckctxf000kssjf1r4twqts" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/11/06/webpack基础/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    webpack基础
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/10/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">Hello World</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 unique.mo<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

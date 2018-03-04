@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Node产品化 | unqie.mo的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="项目工程化工程化：项目的组织能力。在项目工程化过程中，最基本的几步是目录结构、构建工具、编码规范和代码审查等。 目录结构目前，主要的两类项目为Web应用和模块应用。普通的模块应用遵循CommonJS的模块和包规范即可。对于Web应用，组织方式各种各样，但是只要遵循单一原则即可。常见的Web应用都是以MVC为主要框架的，其余部分在这个基础上进行扩展。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node产品化">
+<meta property="og:url" content="http://yoursite.com/2017/10/05/Node产品化/index.html">
+<meta property="og:site_name" content="unqie.mo的博客">
+<meta property="og:description" content="项目工程化工程化：项目的组织能力。在项目工程化过程中，最基本的几步是目录结构、构建工具、编码规范和代码审查等。 目录结构目前，主要的两类项目为Web应用和模块应用。普通的模块应用遵循CommonJS的模块和包规范即可。对于Web应用，组织方式各种各样，但是只要遵循单一原则即可。常见的Web应用都是以MVC为主要框架的，其余部分在这个基础上进行扩展。">
+<meta property="og:updated_time" content="2018-03-04T08:44:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node产品化">
+<meta name="twitter:description" content="项目工程化工程化：项目的组织能力。在项目工程化过程中，最基本的几步是目录结构、构建工具、编码规范和代码审查等。 目录结构目前，主要的两类项目为Web应用和模块应用。普通的模块应用遵循CommonJS的模块和包规范即可。对于Web应用，组织方式各种各样，但是只要遵循单一原则即可。常见的Web应用都是以MVC为主要框架的，其余部分在这个基础上进行扩展。">
+    
+
+    
+        <link rel="alternate" href="/" title="unqie.mo的博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">unqie.mo的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            <section id="main"><article id="post-Node产品化" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Node产品化
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/10/05/Node产品化/">
+            <time datetime="2017-10-04T16:00:00.000Z" itemprop="datePublished">2017-10-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/node/">node</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="项目工程化"><a href="#项目工程化" class="headerlink" title="项目工程化"></a>项目工程化</h3><p>工程化：项目的组织能力。<br>在项目工程化过程中，最基本的几步是目录结构、构建工具、编码规范和代码审查等。</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>目前，主要的两类项目为Web应用和模块应用。普通的模块应用遵循CommonJS的模块和包规范即可。对于Web应用，组织方式各种各样，但是只要遵循单一原则即可。常见的Web应用都是以MVC为主要框架的，其余部分在这个基础上进行扩展。</p>
+<a id="more"></a>
+<h3 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h3><p>有了源代码项目，只是完成了第一步。要想真正能用上源代码，还需要一定的操作，这些操作主要有合并静态文件、压缩文件大小、打包应用、编译模块等。将常用操作通过构建工具配置起来后，后续只要简单的命令就能完成大部分工作了。</p>
+<ul>
+<li>Makefile</li>
+<li>Grunt<br>Grunt的核心插件以grunt-contrib-开头，在NPM包管理平台上可以找到和查看。Grunt提供了3个模块分别用于运行时、初始化和命令行：grunt、grunt-init、grunt-cli。</li>
+</ul>
+<h3 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a>编码规范</h3><p>提升代码可读性、可维护性。JSLint，JSHint。</p>
+<h3 id="代码审查"><a href="#代码审查" class="headerlink" title="代码审查"></a>代码审查</h3><h3 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h3><p>代码在完成开发、审查、合并之后，才会进入部署流程。尽管经过一系列严禁的人工审查和单元测试的质量保证，但也并不能直接上线到生产环境中直接运行，还需要在测试环境中测试之后才允许进入生产环境进行线上测试。</p>
+<h3 id="部署环境"><a href="#部署环境" class="headerlink" title="部署环境"></a>部署环境</h3><p>test，stage，product</p>
+<h3 id="部署操作"><a href="#部署操作" class="headerlink" title="部署操作"></a>部署操作</h3><p>开发环境中，直接在命令行中执行node file.js以启动应用。这对于开发中的应用而言，时常中断进程和频繁重启并无问题。但是对长时间执行的服务进程而言，这里存在两个问题：首先这会占据一个命令行窗口，其次随着窗口的退出会导致打开的进程一并退出。为了能让进程持续执行，我们可能会用到nohup和&amp;以不挂断进程的方式执行：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup node app.js &amp;</span><br></pre></td></tr></table></figure></p>
+<p>启动进程很容易，怎么停止进程和重启进程？<br>手工管理的方式显得繁琐，为此，我们需要一个脚本来实现应用的启动、停止和重启等操作。bash脚本是最精巧又擅长此类需求的。</p>
+<p>脚本略。</p>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h4 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h4><p>在普通的Web应用中，Node尽管也能通过中间件实现静态文件服务，但是Node处理静态文件的能力并不算突出。将图片、脚本、样式表和多媒体等静态文件都引导到专业的静态文件服务器上，让Node只处理动态请求即可。这个过程可以用Nginx或者专业的CDN来处理。</p>
+<p>将动态请求和静态请求分离后，服务器可以专注在动态服务方面，专业的CDN会将静态文件与用户尽可能靠近，同时能够有更精确和高效的缓存机制。静态文件请求分离后，对静态请求使用不同的域名或多个域名还能消除掉不必要的Cookie传输和浏览器对下载线程数的限制。</p>
+<h4 id="启用缓存"><a href="#启用缓存" class="headerlink" title="启用缓存"></a>启用缓存</h4><p>Redis，Memcached。</p>
+<h4 id="多进程架构"><a href="#多进程架构" class="headerlink" title="多进程架构"></a>多进程架构</h4><p>通过多进程架构，不仅可以充分利用多核CPU，更是可以建立机制让Node进程更加健壮，以保障Web应用持续服务。<br>cluster，pm，forever，pm2等。</p>
+<h4 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h4><p>主要针对数据库。</p>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><p>在健全的系统中，完善的日志记录最能够还原问题现场。</p>
+<h4 id="访问日志"><a href="#访问日志" class="headerlink" title="访问日志"></a>访问日志</h4><p>访问日志一般用来记录每个客户端对应用的访问。在Web应用中，主要记录HTTP请求中的关键数据。一般的Web服务器都实现了记录访问日志的功能，只需要简单的配置即可启用。在用Nginx或Apache进行反向代理时，可以利用这些已有的设施完成访问日志的记录。在Node开发的Web应用中，也可以自行实现访问日志的记录。</p>
+<h4 id="异常日志"><a href="#异常日志" class="headerlink" title="异常日志"></a>异常日志</h4><p>记录到文件中？createWriteStream？</p>
+<p>在逐层次的异步API调用中，异常是该传递给调用方还是该立即通过日志记录，这是一个需要注意的问题。就通常的API编写而言，尽量不要隐藏错误，不要通过try/catch块将异常捕获，然后隐藏起来不向外部调用者暴露。这对于底层API的设计而言，尤为重要。事实上，日志通常是服务于业务的。建议异常尽量由最上层的调用者捕获记录，底层调用或中间层调用中出现的异常只要正常传递给上层的调用方即可。</p>
+<h4 id="日志与数据库"><a href="#日志与数据库" class="headerlink" title="日志与数据库"></a>日志与数据库</h4><h4 id="分割日志"><a href="#分割日志" class="headerlink" title="分割日志"></a>分割日志</h4><h3 id="监控报警"><a href="#监控报警" class="headerlink" title="监控报警"></a>监控报警</h3><p>应用的监控主要有两类，一种是业务逻辑型的监控，一种是硬件型的监控。监控主要通过定时采样来进行记录。除此之外，还要对监控的信息设置上限，一旦出现大的波动，就需要发出警报提醒开发者。为了较好地供开发者使用，监控到的信息一般还要通过数据可视化的方式反映出来，以便更直观地查看。</p>
+<h4 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h4><p>监控的主要目的是为了将一些重要指标采样记录下来，一旦这些指标发生较大变化，可以配合报警系统将问题反馈到负责人那。监控的点可以很细致，也可以只选主要的指标。</p>
+<ul>
+<li>日志监控</li>
+<li>QPS，PV，UV等</li>
+<li>响应时间</li>
+<li>响应时间可以在Nginx一类的反向代理商监控，也可以通过应用自行产生的访问日志来监控。</li>
+<li>进程监控</li>
+<li>磁盘监控</li>
+<li>内存监控</li>
+<li>CPU占用监控</li>
+<li>CPU load监控</li>
+<li>I/O负载</li>
+<li>网络监控</li>
+<li>应用状态监控</li>
+<li>DNS监控</li>
+</ul>
+<h4 id="报警的实现"><a href="#报警的实现" class="headerlink" title="报警的实现"></a>报警的实现</h4><ul>
+<li>邮件报警</li>
+<li>短信或电话报警</li>
+</ul>
+<h4 id="监控系统的稳定性"><a href="#监控系统的稳定性" class="headerlink" title="监控系统的稳定性"></a>监控系统的稳定性</h4><h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><ul>
+<li>多机器<br>多机器部署应用带来的好处是能利用更多的硬件资源，为更多的请求服务。同事能够在有故障时，继续服务用户请求，保证整体系统高可用性。但是一旦出现分布式，就需要考虑负载均衡、状态共享和数据一致性等问题。</li>
+<li>多机房</li>
+<li>容灾备份</li>
+</ul>
+<h3 id="异构共存"><a href="#异构共存" class="headerlink" title="异构共存"></a>异构共存</h3>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/10/05/Node产品化/" data-id="cjeckctvn0001ssjfh6cix1li" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/10/05/构建Web应用4——中间件/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    构建Web应用4——中间件
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/09/11/REM——随着窗口大小变化而变化/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">REM——随着窗口大小变化而变化</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 unique.mo<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>构建Web应用3——路由解析 | unqie.mo的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="文件路径型 静态文件这种方式的路由很简单，URL的路径与网站目录的路径一致，无须转换，非常直观。这种路由的处理方式也很简单，将请求路径对应的文件发送给客户端即可。 动态文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建Web应用3——路由解析">
+<meta property="og:url" content="http://yoursite.com/2017/09/09/构建Web应用3——路由解析/index.html">
+<meta property="og:site_name" content="unqie.mo的博客">
+<meta property="og:description" content="文件路径型 静态文件这种方式的路由很简单，URL的路径与网站目录的路径一致，无须转换，非常直观。这种路由的处理方式也很简单，将请求路径对应的文件发送给客户端即可。 动态文件">
+<meta property="og:updated_time" content="2018-03-04T08:44:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建Web应用3——路由解析">
+<meta name="twitter:description" content="文件路径型 静态文件这种方式的路由很简单，URL的路径与网站目录的路径一致，无须转换，非常直观。这种路由的处理方式也很简单，将请求路径对应的文件发送给客户端即可。 动态文件">
+    
+
+    
+        <link rel="alternate" href="/" title="unqie.mo的博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">unqie.mo的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            <section id="main"><article id="post-构建Web应用3——路由解析" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            构建Web应用3——路由解析
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/09/09/构建Web应用3——路由解析/">
+            <time datetime="2017-09-08T16:00:00.000Z" itemprop="datePublished">2017-09-09</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/node/">node</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="文件路径型"><a href="#文件路径型" class="headerlink" title="文件路径型"></a>文件路径型</h3><ul>
+<li>静态文件<br>这种方式的路由很简单，URL的路径与网站目录的路径一致，无须转换，非常直观。这种路由的处理方式也很简单，将请求路径对应的文件发送给客户端即可。</li>
+<li>动态文件</li>
+</ul>
+<a id="more"></a>
+<h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><p>在MVC流行之前，主流的处理方式都是通过文件路径进行处理的，甚至以为是常态。直到有一天开发者发现用户请求的URL路径原来可以跟具体脚本所在的路径没有任何关系。</p>
+<p>MVC模型的主要思想是将业务逻辑按照职责分离：</p>
+<ul>
+<li>控制器（Controller）：一组行为的组合</li>
+<li>模型（Model）：数据相关的操作和封装</li>
+<li>视图（View）：视图的渲染</li>
+</ul>
+<p>这是目前最经典的分层模式，工作模式如下：</p>
+<ul>
+<li>路由解析，根据URL寻找到对应的控制器和行为</li>
+<li>行为调用相关的模型，进行数据操作</li>
+<li>数据操作结束后，调用视图和相关数据进行页面渲染，输出到客户端</li>
+</ul>
+<p>控制器如何调用模型和如何渲染页面，各种实现都大同小异。<br>如何根据URL做路由映射，这里有2个分支实现：</p>
+<ul>
+<li>手工关联映射：有一个路由文件来将URL映射到对应的控制器</li>
+<li>自然关联映射：没有这样的文件</li>
+</ul>
+<p>User =&gt; Controller(Action) =&gt; Model =&gt; View =&gt; User</p>
+<h4 id="手工映射"><a href="#手工映射" class="headerlink" title="手工映射"></a>手工映射</h4><p>手工映射除了需要手工配置路由较为原始外，它对URL的要求十分灵活，几乎没有格式上的限制。<br>假设有一个处理设置用户信息的控制器：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exports.setting = <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再添加一个映射的方法即可：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> routes = [];</span><br><span class="line"><span class="keyword">var</span> use = <span class="function"><span class="keyword">function</span>(<span class="params">path, action</span>) </span>&#123;</span><br><span class="line">  routes.push([path, action]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>我们在入口程序中判断URL，然后执行对应的逻辑，于是就完成了基本的路由映射过程了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pathname = url.parse(req.url).pathname;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; routes.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> route = routes[i];</span><br><span class="line">    <span class="keyword">if</span> (pathname === route[<span class="number">0</span>]) &#123;</span><br><span class="line">      <span class="keyword">var</span> action = route[<span class="number">1</span>];</span><br><span class="line">      action(req, res);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理404请求</span></span><br><span class="line">  handle404(req, res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>正则匹配<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use(<span class="string">'/profile/:username'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>于是改进我们的匹配方式，在通过use注册路由时需要将路径转换为一个正则表达式，然后通过它来进行匹配：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pathRegexp = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">  ... <span class="comment">// 十分复杂正则表达式转换</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'^'</span> + path + <span class="string">'$'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// /profile/:username =&gt; /profiel/aaa, /profile/bbb</span></span><br></pre></td></tr></table></figure></p>
+<p>现在，重新改进注册部分：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> use = <span class="function"><span class="keyword">function</span>(<span class="params">path, action</span>) </span>&#123;</span><br><span class="line">  routes.push([pathRegexp(path), action]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>以及匹配部分：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pathname = url.parse(req.url).pathname;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; routes.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> route = routes[i];</span><br><span class="line">    <span class="comment">// 正则匹配</span></span><br><span class="line">    <span class="keyword">if</span> (route[<span class="number">0</span>].exec(pathname)) &#123;</span><br><span class="line">      <span class="keyword">var</span> action = route[<span class="number">1</span>];</span><br><span class="line">      action(req, res);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理404请求</span></span><br><span class="line">  handle404(req, res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>参数解析<br>尽管完成了正则匹配，可以实现相似URL的匹配，但是:username到底匹配了啥，还没有解决。为此我们还需要进一步将匹配到的内容抽取出来，希望在业务中能这样调用：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use(<span class="string">'/profile/:username'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> username = req.params.username;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里的目标是将抽取的内容设置到req.params处。那么第一步就是将键值抽取出来：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pathRegexp = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> keys = [];</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    keys: keys,</span><br><span class="line">    regexp: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'^'</span> + path + <span class="string">'$'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>我们将根据抽取的键值和实际的URL得到键值匹配到的实际值，并设置到req.params处：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pathname = url.parse(req.url).pathname;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; routes.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> route = routes[i];</span><br><span class="line">    <span class="comment">// 正则匹配</span></span><br><span class="line">    <span class="keyword">var</span> reg = route[<span class="number">0</span>].regexp;</span><br><span class="line">    <span class="keyword">var</span> keys = route[<span class="number">0</span>].keys;</span><br><span class="line">    <span class="keyword">var</span> matched = reg.exec(pathname);</span><br><span class="line">    <span class="keyword">if</span> (matched) &#123;</span><br><span class="line">      <span class="comment">// 抽取具体值</span></span><br><span class="line">      <span class="keyword">var</span> params = &#123;&#125;;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; keys.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> value = matched[i+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (value) &#123;</span><br><span class="line">          params[keys[i]] = value;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      req.params = params;</span><br><span class="line">      <span class="keyword">var</span> action = route[<span class="number">1</span>];</span><br><span class="line">      action(req, res);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理404请求</span></span><br><span class="line">  handle404(req, res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="自然映射"><a href="#自然映射" class="headerlink" title="自然映射"></a>自然映射</h4><p>手工映射的优点在于路径可以很灵活，但是如果项目较大，路由映射的数量也会很多。从前端路径到具体的控制器文件，需要进行查阅才能定位到实际代码的位置，为此有人提出，尽是路由不如无路由。实际上并非没有路由，而是路由按一种约定的方式自然而然地实现了路由，而无需去维护路由映射。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/controller/action/param1/param2/param3</span><br></pre></td></tr></table></figure></p>
+<p>例子：/user/setting/12/1987，它会按约定去找controllers目录下的user文件，将其require出来后，调用这个文件模块的setting()方法，而其余的值作为参数直接传递给这个方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pathname = url.parse(req.url).pathname;</span><br><span class="line">  <span class="keyword">var</span> paths = pathname.split(<span class="string">'/'</span>);</span><br><span class="line">  <span class="keyword">var</span> controller = paths[<span class="number">1</span>] || <span class="string">'index'</span>;</span><br><span class="line">  <span class="keyword">var</span> action = paths[<span class="number">2</span>] || <span class="string">'index'</span>;</span><br><span class="line">  <span class="keyword">var</span> args = paths.slice(<span class="number">3</span>);</span><br><span class="line">  <span class="keyword">var</span> <span class="built_in">module</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// require的缓存机制使得只有第一次是阻塞的</span></span><br><span class="line">    <span class="built_in">module</span> = <span class="built_in">require</span>(<span class="string">'./controllers/'</span> + controller);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">    handle500(req, res);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> method = <span class="built_in">module</span>[action];</span><br><span class="line">  <span class="keyword">if</span> (method) &#123;</span><br><span class="line">    method.apply(<span class="literal">null</span>, [req, res].concat(args));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    handle500(req, res);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于这种自然映射的方式没有指明参数的名称，所以无法采用req.params的方式提取，但是直接通过参数获取更简洁：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exports.setting = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, month, year</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// TODO</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="RESTful（Representational-State-Transfer，表现层状态转化）"><a href="#RESTful（Representational-State-Transfer，表现层状态转化）" class="headerlink" title="RESTful（Representational State Transfer，表现层状态转化）"></a>RESTful（Representational State Transfer，表现层状态转化）</h3><p>MVC模式大行其道多年，知道RESTful的流行，大家才意识到URL也可以设计得很规范，请求方法也能作为逻辑分发的单元。</p>
+<p>RESTful的设计哲学主要将服务器端提供的内容实体看作一个资源，并表现在URL上。</p>
+<p>例子：/users/jack<br>这个地址代表一个资源，对这个资源的操作，主要体现在HTTP请求方法上，不是体现在URL上。<br>过去的增删查改（操作行为主要体现在行为上，主要使用的请求方法时POST和GET）：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST /user/add?username=jack</span><br><span class="line">GET /user/remove?username=jack</span><br><span class="line">POST /user/update?usernaem=jack</span><br><span class="line">GET /user/get?username=jack</span><br></pre></td></tr></table></figure></p>
+<p>RESTful设计：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST /user/jack</span><br><span class="line">DELETE /user/jack</span><br><span class="line">PUT /user/jack</span><br><span class="line">GET /user/jack</span><br></pre></td></tr></table></figure></p>
+<p>它将DELETE和PUT请求方法引入设计中，参与资源的操作和更改资源的状态。</p>
+<p>另外，在RESTful设计中，资源的具体格式由请求报头中的Accept字段和服务器端的支持情况来决定。</p>
+<p>所以，RESTful的设计就是，通过URL设计资源、请求方法定义资源的操作，通过Accept决定资源的表现形式。</p>
+<p>RESTful与MVC设计并不冲突，而且是更好的改进。相比MVC，RESTful只是将HTTP请求方法也加入了路由的过程，以及在URL路径上体现得更资源化。</p>
+<h4 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h4><p>为了让Node能够支持RESTful需求，改进下我们的设计。如果use是对所有请求方法的处理，那么在RESTful的场景下，我们需要区分请求方法设计：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> routes = &#123;<span class="string">'all'</span>: []&#125;;</span><br><span class="line"><span class="keyword">var</span> app = &#123;&#125;;</span><br><span class="line">app.use = <span class="function"><span class="keyword">function</span>(<span class="params">path, action</span>) </span>&#123;</span><br><span class="line">  routes.all.push([pathRegexp(path), action]);</span><br><span class="line">&#125;;</span><br><span class="line">[<span class="string">'get'</span>, <span class="string">'put'</span>, <span class="string">'delete'</span>, <span class="string">'post'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">method</span>) </span>&#123;</span><br><span class="line">  routes[method] = [];</span><br><span class="line">  app[method] = <span class="function"><span class="keyword">function</span>(<span class="params">path, action</span>) </span>&#123;</span><br><span class="line">    routes[method].push([pathRegexp(path), action]);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>通过以下方式完成路由映射：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 增加用户</span></span><br><span class="line">app.post(<span class="string">'/user/:username'</span>, addUser);</span><br><span class="line"><span class="comment">// 删除用户</span></span><br><span class="line">app.delete(<span class="string">'/user/:username'</span>, removeUser);</span><br><span class="line"><span class="comment">// 修改用户</span></span><br><span class="line">app.put(<span class="string">'/user/:username'</span>, updateUser);</span><br><span class="line"><span class="comment">// 查询用户</span></span><br><span class="line">app.get(<span class="string">'/user/:username'</span>, getUser);</span><br></pre></td></tr></table></figure></p>
+<p>这样的路由能够识别请求方法，并将业务进行分发。为了让分发部分更简洁，我们先将匹配的部分抽取为match()方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> match = <span class="function"><span class="keyword">function</span>(<span class="params">pathname, routes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; routes.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> route = routes[i];</span><br><span class="line">    <span class="comment">// 正则匹配</span></span><br><span class="line">    <span class="keyword">var</span> reg = route[<span class="number">0</span>].regexp;</span><br><span class="line">    <span class="keyword">var</span> keys = route[<span class="number">0</span>].keys;</span><br><span class="line">    <span class="keyword">var</span> matched = reg.exec(pathname);</span><br><span class="line">    <span class="keyword">if</span> (matched) &#123;</span><br><span class="line">      <span class="comment">// 抽取具体值</span></span><br><span class="line">      <span class="keyword">var</span> params = &#123;&#125;;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = keys.length; i &lt; l; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> value = matched[i + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (value) &#123;</span><br><span class="line">          params[keys[i]] = value;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      req.params = params;</span><br><span class="line">      <span class="keyword">var</span> action = route[<span class="number">1</span>];</span><br><span class="line">      action(req, res);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>然后改进我们的分发部分：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pathname = url.parse(req.url).pathname;</span><br><span class="line">  <span class="comment">// 将请求方法变为小写</span></span><br><span class="line">  <span class="keyword">var</span> method = req.method.toLowerCase();</span><br><span class="line">  <span class="keyword">if</span> (routes.hasOwnProperty(method)) &#123;</span><br><span class="line">    <span class="comment">// 根据请求方法分发</span></span><br><span class="line">    <span class="keyword">if</span> (match(pathname, routes[method])) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 如果路径没有匹配成功，尝试让all()来处理</span></span><br><span class="line">      <span class="keyword">if</span> (match(pathname, routes.all)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 直接让all()来处理</span></span><br><span class="line">    <span class="keyword">if</span> (match(pathname, routes.all)) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 处理404请求</span></span><br><span class="line">  handle404(req, res);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/09/09/构建Web应用3——路由解析/" data-id="cjeckctxr000rssjfnt0tk7ah" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/09/11/图片加载完成后再做其他操作/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    图片加载完成后再做其他操作
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/09/04/构建Web应用2——缓存、数据上传/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">构建Web应用2——缓存、数据上传</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 unique.mo<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
