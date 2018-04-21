@@ -99,6 +99,138 @@
         <div class="outer">
             
             <section id="main">
+    <article id="post-构建Web应用2——缓存、数据上传" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/09/04/构建Web应用2——缓存、数据上传/">构建Web应用2——缓存、数据上传</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/09/04/构建Web应用2——缓存、数据上传/">
+            <time datetime="2017-09-03T16:00:00.000Z" itemprop="datePublished">2017-09-04</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/node/">node</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>为了提高性能，YSlow中提到几条关于缓存的规则：</p>
+<ul>
+<li>添加Expires或Cache-Control到报文头中</li>
+<li>配置ETags</li>
+<li>让Ajax可缓存</li>
+</ul>
+<p>通常来说，POST, DELETE, PUT这类带行为性的请求操作一般不做任何缓存，大多数缓存只应用在GET请求中。</p></p>
+            <p class="article-more-link">
+                <a href="/2017/09/04/构建Web应用2——缓存、数据上传/#more">Read More</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/09/04/构建Web应用2——缓存、数据上传/" data-id="cjg9by5f8000pnc78df8cr9if" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-构建Web应用1" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -159,7 +291,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/08/27/构建Web应用1/" data-id="cjemuo9fd000klfjctesuwsc8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2017/08/27/构建Web应用1/" data-id="cjg9by5f4000mnc78l52rwjxo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -286,7 +418,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/08/26/node模块实现/" data-id="cjemuo9ey000alfjcg9yl3n2t" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2017/08/26/node模块实现/" data-id="cjg9by5es000fnc78st0r9rx9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -412,7 +544,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/08/22/hive-sql语句/" data-id="cjemuo9ew0008lfjc04imm34y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2017/08/22/hive-sql语句/" data-id="cjg9by5ei000anc78jzmf333n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -539,7 +671,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2017/08/22/CommonJs规范/" data-id="cjemuo9e70000lfjc0b1cdm7j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2017/08/22/CommonJs规范/" data-id="cjg9by5d60000nc78j4nb219z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
